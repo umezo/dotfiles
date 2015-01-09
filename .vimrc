@@ -20,10 +20,11 @@ NeoBundle 'git://repo.or.cz/vcscommand'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'git://github.com/thinca/vim-ft-svn_diff.git'
 NeoBundle 'git://github.com/Shougo/vimproc.git'
-NeoBundle 'git://github.com/hrsh7th/vim-unite-vcs.git'
 NeoBundle 'git://github.com/scrooloose/syntastic.git'
-" NeoBundle 'git://github.com/thinca/vim-qfreplace.git'
 NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'git://github.com/hrsh7th/vim-versions.git'
+NeoBundle 'git://github.com/leafgarland/typescript-vim.git'
+
 
 
 filetype plugin on
@@ -32,7 +33,7 @@ filetype plugin on
 
 
 
-let g:vimfiler_safe_mode_by_default=0
+let g:syntastic_ignore_files=['.html$','.tpl$']
 
 
 
@@ -92,7 +93,7 @@ set nowrap                                                    " disable line wra
 set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 set laststatus=2                                              " always show status line
 
-set diffopt=iwhite
+set diffopt=iwhite,filler
 
 
 "set foldmethod=marker
@@ -206,11 +207,14 @@ call unite#custom_max_candidates('file_rec,file_rec/async', 0)
 
 
 let mapleader = "\<TAB>"
-nmap <leader><c-u><c-f> :Unite file_rec/async:. 
-nmap <leader><c-u><c-g> :Unite grep:. 
-nmap <leader><c-u><c-v> :Unite vcs/
-nmap <leader><c-u><c-l> :Unite line
-nmap <leader><c-u><c-r> :UniteResume<CR>
+nnoremap <leader><c-u><c-f> :Unite file_rec/async:
+nnoremap <leader><c-u><c-j> :Unite file_rec/async:js/web/js/watch
+nnoremap <leader><c-u><c-c> :Unite file_rec/async:js/web/css/watch_zero/src
+nnoremap <leader><c-u><c-t> :Unite file_rec/async:js/web/tpl/watch_zero
+nnoremap <leader><c-u><c-g> :Unite grep:
+nnoremap <leader><c-u><c-v> :UniteVersions
+nnoremap <leader><c-u><c-l> :Unite line
+nnoremap <leader><c-u><c-r> :UniteResume<CR>
 
 
 
@@ -226,3 +230,35 @@ nmap <leader><c-u><c-r> :UniteResume<CR>
 " function g:unite_source_menu_menus.global.map(key, value)
 "   return { 'word': a:key, 'kind': 'command', 'action__command': a:value }
 " endfunction
+
+
+
+
+
+
+let g:my_coding_style = {}                                                               
+let g:my_coding_style['s']  = 'setlocal expandtab'                                       
+let g:my_coding_style['t']  = 'setlocal noexpandtab'                                     
+let g:my_coding_style['s2'] = 'setlocal expandtab   tabstop=2 shiftwidth=2 softtabstop=2'
+let g:my_coding_style['t2'] = 'setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2'
+let g:my_coding_style['s4'] = 'setlocal expandtab   tabstop=4 shiftwidth=4 softtabstop=4'
+let g:my_coding_style['t4'] = 'setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4'
+command! -bar -nargs=1 CodingStyle execute get(g:my_coding_style, <f-args>, '')          
+                                                                                        
+autocmd! BufNewFile,BufRead *.ejs setlocal filetype=html                                 
+autocmd! Filetype ejs setlocal filetype=html                                             
+autocmd! BufNewFile,BufRead *.as setlocal filetype=actionscript                          
+autocmd! Filetype as setlocal filetype=actionscript                                      
+autocmd! BufNewFile,BufRead *.js setlocal filetype=javascript                            
+autocmd! Filetype js setlocal filetype=javascript                                        
+autocmd! Filetype smarty setlocal filetype=html                                          
+autocmd! Filetype javascript execute get(g:my_coding_style, 's2', '')                    
+autocmd! Filetype actionscript execute get(g:my_coding_style, 't4', '')                  
+autocmd! Filetype coffee execute get(g:my_coding_style, 's2', '')                        
+autocmd! Filetype vim execute get(g:my_coding_style, 's2', '')                           
+autocmd! Filetype php execute get(g:my_coding_style, 't4', '')                           
+autocmd! Filetype html execute get(g:my_coding_style, 't2', '')                          
+autocmd! Filetype xhtml execute get(g:my_coding_style, 't2', '')                         
+autocmd! Filetype css execute get(g:my_coding_style, 's2', '')                           
+autocmd! Filetype scss execute get(g:my_coding_style, 's2', '')
+set listchars=tab:\|\ ,trail:^

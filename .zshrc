@@ -9,17 +9,25 @@ export EDITOR=vim
 export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
 
+export PATH=$HOME/.rbenv/bin:$PATH
+export PATH="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin":$PATH
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+#export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
 export PATH=/usr/local/bin:$PATH
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+
 
 export MANPATH=/opt/local/man:$MANPATH
-export JAVA_HOME=/Library/Java/Home/
+#export JAVA_HOME=/Library/Java/Home/
+
+#export MANPAGER="col -b -x|vim -R -c 'set ft=man nolist nomod noma' -"
 
 ##############################################
 # alias
 #---------------------------------------------
 
 #alias ls='ls -F --color'
-alias ls='ls -G'
+alias ls='ls -F --color'
 alias lsa="ls -la"
 alias lf="ls -F"
 alias ll="ls -l"
@@ -34,6 +42,8 @@ alias grep="egrep -ir --color"
 #alias du="du -h"
 #alias df="df -h"
 alias smb='convert_smb_url'
+alias cpip='/sbin/ifconfig en1 | egrep "inet [0-9.]+" -o | sed -e "s/inet //" | pbcopy && pbpaste'
+alias tail_trace='tail -f "${HOME}/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt"'
 
 ##############################################
 # prompt 
@@ -41,29 +51,32 @@ alias smb='convert_smb_url'
 autoload colors
 colors
 
+
 local COMMAND=""
 local COMMAND_TIME=""
 local CURRENT_BRANCH=""
 precmd() { 
-    if [ "$COMMAND_TIME" -ne "0" ] ; then 
-        local d=`date +%s`
-        d=`expr $d - $COMMAND_TIME`
-        if [ "$d" -ge "3" ] ; then
-            COMMAND="$COMMAND "
-            growlnotify -t "${${(s: :)COMMAND}[1]}" -m "$COMMAND" 
+    if [ -z `which growlnotify 2>/dev/null` ] ; then
+
+    else
+        if [ "$COMMAND_TIME" -ne "0" ] ; then 
+            local d=`date +%s`
+            d=`expr $d - $COMMAND_TIME`
+            if [ "$d" -ge "3" ] ; then
+                COMMAND="$COMMAND "
+                growlnotify -t "${${(s: :)COMMAND}[1]}" -m "$COMMAND" 
+            fi
         fi
+        COMMAND="0"
+        COMMAND_TIME="0"
     fi
-    COMMAND="0"
-    COMMAND_TIME="0"
 
-
-    CURRENT_BRANCH=`git symbolic-ref --short HEAD 2>/dev/null`
+    CURRENT_BRANCH=`git symbolic-ref HEAD 2>/dev/null | sed -e "s/refs\/heads\///"`
     if [ -z "${CURRENT_BRANCH}" ] ; then
       CURRENT_BRANCH=
     else
       CURRENT_BRANCH="[${CURRENT_BRANCH}]"
     fi
-
 }
 preexec () {
     COMMAND="${1}"
@@ -180,6 +193,8 @@ function convert_smb_url() {
     print -R "$file_path" | sed -e "$sed1" -e "$sed2" | pbcopy
 
     #print convert result will be copied into clipboard
+
+    open `pbpaste`
   fi
 }
 
@@ -193,10 +208,49 @@ function up() {
 }
 
 
+
+function man {
+  local p
+  local m
+  if [ "$PAGER" != "" ];then
+    p="$PAGER"
+  fi
+  if [ "$MANPAGER" != "" ];then
+    m="$MNNPAGER"
+  fi
+  unset PAGER
+  unset MANPAGER
+  val=$(command man $* 2>&1)
+  ret=$?
+  if [ $ret -eq 0 ];then
+    echo "$val"|col -bx|vim -R -c 'set ft=man' -
+  else
+    echo "$val"
+  fi
+  if [ "$p" != "" ];then
+    export PAGER="$p"
+  fi
+  if [ "$m" != "" ];then
+    export MANPAGER="$m"
+  fi
+  return $ret
+}
+
+
 local WORK_ROOT=${HOME}/Work
 local DEV_ROOT=${WORK_ROOT}/watch
 alias cdr='cd ${WORK_ROOT}'
 alias cddev='cd ${DEV_ROOT}'
 alias cdcss='cd ${DEV_ROOT}/web/css/watch_zero'
+alias rmtplc='rm -rf ${DEV_ROOT}/web/tplc/*'
+
 
 fpath=(~/.functions ${fpath})
+source ~/.nvm/nvm.sh
+eval "$(rbenv init -)"
+#source ~/.phpbrew/bashrc
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
