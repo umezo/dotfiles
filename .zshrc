@@ -51,41 +51,43 @@ alias tail_trace='tail -f "${HOME}/Library/Preferences/Macromedia/Flash Player/L
 autoload colors
 colors
 
+## zsh integration: any command that takes longer than 3 seconds
+## https://gist.github.com/syui/7112389/raw/growl.zsh
+## http://qiita.com/kazuph/items/3bfdfce6b7d02b43bf4d
 
-local COMMAND=""
-local COMMAND_TIME=""
+alias pong='perl -nle '\''print "display notification \"$_\" with title \"Terminal\""'\'' | osascript'
+
 local CURRENT_BRANCH=""
 precmd() { 
-    if [ -z `which growlnotify 2>/dev/null` ] ; then
-
-    else
-        if [ "$COMMAND_TIME" -ne "0" ] ; then 
-            local d=`date +%s`
-            d=`expr $d - $COMMAND_TIME`
-            if [ "$d" -ge "3" ] ; then
-                COMMAND="$COMMAND "
-                growlnotify -t "${${(s: :)COMMAND}[1]}" -m "$COMMAND" 
-            fi
-        fi
-        COMMAND="0"
-        COMMAND_TIME="0"
+  if (( $? == 0 )); then
+    # message
+    zsh_notify_status=done\!\!
+  else
+    zsh_notify_status=fail
+  fi
+  if [[ "${zsh_notify_cmd}" != "" ]]; then
+    # time
+    if (( `date +%s` - ${zsh_notify_time} > 3 )); then
+      echo ${zsh_notify_cmd} ${zsh_notify_status}  | pong
     fi
+  fi
+  zsh_notify_cmd=
 
-    CURRENT_BRANCH=`git symbolic-ref HEAD 2>/dev/null | sed -e "s/refs\/heads\///"`
-    if [ -z "${CURRENT_BRANCH}" ] ; then
-      CURRENT_BRANCH=
-    else
-      CURRENT_BRANCH="[${CURRENT_BRANCH}]"
-    fi
+  CURRENT_BRANCH=`git symbolic-ref HEAD 2>/dev/null | sed -e "s/refs\/heads\///"`
+  if [ -z "${CURRENT_BRANCH}" ] ; then
+    CURRENT_BRANCH=
+  else
+    CURRENT_BRANCH="[${CURRENT_BRANCH}]"
+  fi
 }
 preexec () {
-    COMMAND="${1}"
-    COMMAND_TIME=`date +%s`
+  zsh_notify_cmd=$1
+  zsh_notify_time=`date +%s`
 }
 
 AGENT_MARK="A"
 if [ -z "$SSH_AGENT_PID" ] ; then
-    AGENT_MARK=":"
+  AGENT_MARK=":"
 fi
 
 local GRAY=$'%{\e[1;30m%}'
@@ -246,11 +248,11 @@ alias rmtplc='rm -rf ${DEV_ROOT}/web/tplc/*'
 
 
 fpath=(~/.functions ${fpath})
-source ~/.nvm/nvm.sh
-eval "$(rbenv init -)"
-#source ~/.phpbrew/bashrc
+ls ~/.nvm     >& /dev/null && source ~/.nvm/nvm.sh
+ls ~/.phpbrew >& /dev/null && source ~/.phpbrew/bashrc
+which rbenv   >& /dev/null && eval "$(rbenv init -)"
+which pyenv   >& /dev/null && eval "$(pyenv init -)"
 export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
