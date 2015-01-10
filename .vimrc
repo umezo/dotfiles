@@ -14,14 +14,12 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.bundle'))
 endif
 
-NeoBundle 'git://github.com/h1mesuke/vim-alignta.git'
-NeoBundle 'git://github.com/mattn/zencoding-vim.git'
+NeoBundle 'git://github.com/mattn/emmet-vim.git'
 NeoBundle 'git://repo.or.cz/vcscommand'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'git://github.com/thinca/vim-ft-svn_diff.git'
 NeoBundle 'git://github.com/Shougo/vimproc.git'
 NeoBundle 'git://github.com/scrooloose/syntastic.git'
-NeoBundle 'git://github.com/Shougo/vimfiler.git'
 NeoBundle 'git://github.com/hrsh7th/vim-versions.git'
 NeoBundle 'git://github.com/leafgarland/typescript-vim.git'
 
@@ -54,8 +52,7 @@ filetype plugin on                                            " enable filetype 
 syntax on                                                     " enable syntax hilighting
 set t_Co=256
 
-"let g:user_zen_leader_key= '<TAB>'                       " set TAB key to trigger for zen coding
-let g:user_zen_expandabbr_key = '<C-F>'                       " set TAB key to trigger for zen coding
+let g:user_emmet_leader_key = '<C-F>'                       " set TAB key to trigger for zen coding
 
 set hlsearch                                                  " hilight words in search
 set incsearch                                                 " use incremental search
@@ -158,7 +155,7 @@ vmap <silent> q :s/^/\/\//g<CR>:nohl<CR>
 " nmap <F2> :undolist<CR>
 
 " open home directory in new tab by F9
-nmap <silent> <F9>  :tabedit ~/<CR>
+" nmap <silent> <F9>  :tabedit ~/<CR>
 nmap <silent> <F10> :tabedit ~/.vimrc<CR>
 "nmap <silent> <F11> :source ~/.vimrc<CR>:echo "updated"<CR>
 nnoremap  <F11> :source ~/.vimrc<CR>:echo "updated"<CR>
@@ -170,14 +167,14 @@ imap <C-h> <Left>
 imap <C-l> <Right>
 
 " use C-y and C-u as BS and Del in insert mode
-imap <C-u> <BS>
-inoremap <leader><C-i> <Del>
+"imap <C-u> <BS>
+"inoremap <leader><C-i> <Del>
 
 " insert line to next line in insert mode
 imap <C-o> <ESC>o
 
 
-vmap <silent> <C-a>= :Alignta =<CR>
+"vmap <silent> <C-a>= :Alignta =<CR>
 
 colorscheme asmdev                                            " color setting
 
@@ -208,9 +205,6 @@ call unite#custom_max_candidates('file_rec,file_rec/async', 0)
 
 let mapleader = "\<TAB>"
 nnoremap <leader><c-u><c-f> :Unite file_rec/async:
-nnoremap <leader><c-u><c-j> :Unite file_rec/async:js/web/js/watch
-nnoremap <leader><c-u><c-c> :Unite file_rec/async:js/web/css/watch_zero/src
-nnoremap <leader><c-u><c-t> :Unite file_rec/async:js/web/tpl/watch_zero
 nnoremap <leader><c-u><c-g> :Unite grep:
 nnoremap <leader><c-u><c-v> :UniteVersions
 nnoremap <leader><c-u><c-l> :Unite line
