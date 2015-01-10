@@ -7,6 +7,7 @@
   merge = merge --no-ff 
   br = branch
   st = status
+  pr = pull --rebase
 
 
 [color]
