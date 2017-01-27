@@ -8,6 +8,7 @@
   br = branch
   st = status
   pr = pull --rebase
+  branch-info = for-each-ref refs/remotes --sort=committerdate --format=\"%(committerdate:short) %(committername) %(refname:short)\"
 
 
 [color]
@@ -16,3 +17,7 @@
   branch = auto
   interactive = auto
   grep = auto
+
+
+[core]
+  excludesfile = ~/.gitignore.personal

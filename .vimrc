@@ -1,51 +1,35 @@
 " ---------------------------------------
-" NeoBundle
-"     https://github.com/Shougo/neobundle.vim
-"     mkdir -p ~/.vim/bundle
-"     git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+"  dein
 " ---------------------------------------
-set nocompatible
-filetype off                   " required!
-filetype plugin indent off     " required!
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-
-  call neobundle#rc(expand('~/.bundle'))
+if &compatible
+  set nocompatible
 endif
+set runtimepath+=~/.dein
 
-NeoBundle 'git://github.com/mattn/emmet-vim.git'
-NeoBundle 'git://repo.or.cz/vcscommand'
-NeoBundle 'git://github.com/Shougo/unite.vim.git'
-NeoBundle 'git://github.com/thinca/vim-ft-svn_diff.git'
-NeoBundle 'git://github.com/Shougo/vimproc.git'
-NeoBundle 'git://github.com/scrooloose/syntastic.git'
-NeoBundle 'git://github.com/hrsh7th/vim-versions.git'
-NeoBundle 'git://github.com/leafgarland/typescript-vim.git'
+call dein#begin('~/.dein')
 
+call dein#add('Shougo/dein.vim')
+call dein#add('mattn/emmet-vim.git'           )
+call dein#add('Shougo/unite.vim.git'          )
+call dein#add('thinca/vim-ft-svn_diff.git'    )
+call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+call dein#add('scrooloose/syntastic.git'      )
+call dein#add('hrsh7th/vim-versions.git'      )
+call dein#add('leafgarland/typescript-vim.git')
+call dein#add('kchmck/vim-coffee-script')
+call dein#add('lambdalisue/unite-grep-vcs')
+call dein#add('slim-template/vim-slim')
+call dein#add('mxw/vim-jsx')
 
+call dein#end()
 
-filetype plugin on
-" ------------------------- end NeoBundle
+filetype plugin indent on
 " ---------------------------------------
-
-
 
 let g:syntastic_ignore_files=['.html$','.tpl$']
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+let g:syntastic_coffee_coffeelint_args = '-f ~/.coffeelintrc'
+let g:syntastic_scss_scss_lint_args = '-c ~/.scss-lint.yml'
+let g:syntastic_javascript_checkers=['eslint']
 
 filetype on
 filetype plugin on                                            " enable filetype plugin
@@ -70,7 +54,6 @@ let g:use_xhtml = 1
 let g:html_use_css = 1
 let g:html_no_pre = 1
 
-
 set nocompatible                                              " disable vi compatibility
 set number                                                    " show line number on left side
 set noswapfile                                                " disable swap file
@@ -92,143 +75,45 @@ set laststatus=2                                              " always show stat
 
 set diffopt=iwhite,filler
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAP
+"________________________________________________________________________________
+let mapleader = "\<TAB>" "means <c-i>
+nnoremap <Space> /
+nnoremap t :tabedit +tabmove .
+nnoremap e :e .
+nnoremap <silent> <C-p> :tabnext<CR>
+nnoremap <silent> <C-n> :tabprevious<CR>
+nnoremap <silent> <C-h> :nohl<CR>
+nnoremap > <C-w>>
+nnoremap < <C-w><
+nnoremap <C-j> <C-e>
+nnoremap <C-k> <C-y>
+nnoremap <leader><c-f><c-f> :call system("eslint --fix " . expand("%"))<CR>:e!<CR>:w<CR>
+nnoremap <silent> <C-c><C-d> :cd %:h<CR>
 
-"set foldmethod=marker
-set foldmethod=indent
-set foldminlines=10
-set foldlevel=1
-set foldnestmax=2
-set foldtext=MyFoldText()
-set fillchars=fold:\ ,vert:\|
-function! MyFoldText()
-    "let line = getline(v:foldstart)
-    "let sub = substitute( line , ' *', '', '')
-    return '        {{{{{{{{{{{{{{{{{{{{{ (>_< ) }}}}}}}}}}}}}}}}}}}}}'
-endfunction
+nnoremap <silent> <F10> :tabedit ~/.vimrc<CR>
+nnoremap <F11> :source ~/.vimrc<CR>:echo "updated"<CR>
 
-" start search by Space
-nmap <Space> /
-
-" open current directory in tab (need push enter
-nmap t :tabedit +tabmove .
-
-" open current directory in current buffer (need push enter
-nmap e :e .
-
-" move to next tab
-nmap <silent> <C-p> :tabnext<CR>
-
-" move to previous tab
-nmap <silent> <C-n> :tabprevious<CR>
-
-" off search hiligh
-nmap <silent> <C-h> :nohl<CR>
-
-" window expanding
-nmap > <C-w>>
-
-" window collapse
-nmap < <C-w><
-
-" scroll down without cursor moving
-nmap <C-j> <C-e>
-
-" scroll up without cursor moving
-nmap <C-k> <C-y>
-
-" insert comment out
-nmap <silent> q I//<ESC>
-
-" remove comment out
-nmap <silent> Q ^xx<ESC>
-
-" cd to directory containing current file
-nmap <silent> <C-c><C-d> :cd %:h<CR>
-
-" insert comment out to multi line
-vmap <silent> Q :s/^\/\///g<CR>:nohl<CR>
-
-" remove comment out from multi line
-vmap <silent> q :s/^/\/\//g<CR>:nohl<CR>
-
-" show undo list by F2
-" nmap <F2> :undolist<CR>
-
-" open home directory in new tab by F9
-" nmap <silent> <F9>  :tabedit ~/<CR>
-nmap <silent> <F10> :tabedit ~/.vimrc<CR>
-"nmap <silent> <F11> :source ~/.vimrc<CR>:echo "updated"<CR>
-nnoremap  <F11> :source ~/.vimrc<CR>:echo "updated"<CR>
-
-" move cursor by jkhl with Control holding in insert mode
+nnoremap <C-o> <ESC>o
 imap <C-j> <Down>
 imap <C-k> <Up>
 imap <C-h> <Left>
 imap <C-l> <Right>
 
-" use C-y and C-u as BS and Del in insert mode
-"imap <C-u> <BS>
-"inoremap <leader><C-i> <Del>
-
-" insert line to next line in insert mode
-imap <C-o> <ESC>o
-
+nnoremap <leader><c-u><c-f> :Unite file_rec/async:
+nnoremap <leader><c-u><c-g> :Unite grep/git:.<CR><c-r><c-w>
+nnoremap <leader><c-u><c-v> :UniteVersions
+nnoremap <leader><c-u><c-l> :Unite line
+nnoremap <leader><c-u><c-r> :UniteResume<CR>
 
 "vmap <silent> <C-a>= :Alignta =<CR>
 
 colorscheme asmdev                                            " color setting
 
-
-
-
-augroup my-unit
-  autocmd!
-  autocmd FileType unite call g:my_unite_settings()
-augroup END
-function! g:my_unite_settings()
-  imap <buffer><Cr> <Plug>(unite_insert_leave)
-"  nmap <buffer><Esc> <Plug>(unite_exit)
-"  nmap <buffer>:q <Plug>(unite_exit)
-endfunction
-
-
-call unite#custom_default_action('file', 'tabopen')
+call unite#custom#default_action('file', 'tabopen')
+call unite#custom#default_action('jump_list', 'tabopen')
 call unite#custom_max_candidates('file_rec,file_rec/async', 0)
-
-
-
-
-
-
-
-
-
-let mapleader = "\<TAB>"
-nnoremap <leader><c-u><c-f> :Unite file_rec/async:
-nnoremap <leader><c-u><c-g> :Unite grep:
-nnoremap <leader><c-u><c-v> :UniteVersions
-nnoremap <leader><c-u><c-l> :Unite line
-nnoremap <leader><c-u><c-r> :UniteResume<CR>
-
-
-
-
-
-
-
-" let g:unite_source_menu_menus={}
-" let g:unite_source_menu_menus.global = { 'description': 'global menu.' }
-" let g:unite_source_menu_menus.cancidates = {
-"   \  'CommandName': 'vim command'
-"   \  }
-" function g:unite_source_menu_menus.global.map(key, value)
-"   return { 'word': a:key, 'kind': 'command', 'action__command': a:value }
-" endfunction
-
-
-
-
-
 
 let g:my_coding_style = {}                                                               
 let g:my_coding_style['s']  = 'setlocal expandtab'                                       
@@ -256,3 +141,7 @@ autocmd! Filetype xhtml execute get(g:my_coding_style, 't2', '')
 autocmd! Filetype css execute get(g:my_coding_style, 's2', '')                           
 autocmd! Filetype scss execute get(g:my_coding_style, 's2', '')
 set listchars=tab:\|\ ,trail:^
+
+au BufNewFile,BufRead *.json.jbuilder set ft=ruby
+
+command! -nargs=1 -complete=file Rename f <args>|call delete(expand('#'))

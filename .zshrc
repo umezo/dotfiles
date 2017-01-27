@@ -1,27 +1,30 @@
+echo "initializing environment vars"
 ##############################################
 # export
 #---------------------------------------------
 #export LANG=ja_JP.UTF-8
-export EDITOR=vim
 export LD_LIBRARY_PATH="$HOME/local/lib"
 export EDITOR=vim
 #export LSCOLORS=ExFxCxdxBxegedabagacad
 export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
 
-export PATH=$HOME/.rbenv/bin:$PATH
-export PATH="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin":$PATH
+export JAVA_HOME='/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home'
+
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-#export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
+export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 export PATH=/usr/local/bin:$PATH
+export PATH=$JAVA_HOME/bin:$PATH
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+export XDG_CONFIG_HOME=$HOME/.config
+export HOMEBREW_GITHUB_API_TOKEN="e85fa3e0a0e281eb1fadf4f1d4286d44393e1f88"
 
 
 export MANPATH=/opt/local/man:$MANPATH
-#export JAVA_HOME=/Library/Java/Home/
 
 #export MANPAGER="col -b -x|vim -R -c 'set ft=man nolist nomod noma' -"
 
+echo "set aliasies"
 ##############################################
 # alias
 #---------------------------------------------
@@ -30,13 +33,13 @@ export MANPATH=/opt/local/man:$MANPATH
 alias ls='ls -F --color'
 alias lsa="ls -la"
 alias lf="ls -F"
-alias ll="ls -l"
+alias ll="ls -la"
 alias su="su -l"
 alias gh="history 0 | grep" 
 alias where="command -v"
 alias ,q='exit'
 alias vi='vim'
-alias grep="egrep -ir --color"
+alias grep="egrep -i --color"
 #alias j="jobs -l"
 #alias gd='dirs -v;echo -n "select number: "; read newdir; cd -"$newdir"'
 #alias du="du -h"
@@ -44,7 +47,10 @@ alias grep="egrep -ir --color"
 alias smb='convert_smb_url'
 alias cpip='/sbin/ifconfig en1 | egrep "inet [0-9.]+" -o | sed -e "s/inet //" | pbcopy && pbpaste'
 alias tail_trace='tail -f "${HOME}/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt"'
+#alias vim='nvim'
+alias cdr='cd ${HOME}/Work'
 
+echo "set prompt styles"
 ##############################################
 # prompt 
 #---------------------------------------------
@@ -115,6 +121,7 @@ fi
 setopt PROMPT_SUBST
 
 
+echo "set options"
 ##############################################
 # set options
 #---------------------------------------------
@@ -125,6 +132,7 @@ setopt list_packed
 #setopt noautoremoveslash # no remove postfix slash of command line
 #setopt nolistbeep # no beep sound when complete list displayed
 
+echo "set history options"
 ##############################################
 # history
 #---------------------------------------------
@@ -145,6 +153,7 @@ setopt hist_ignore_all_dups hist_save_no_dups
 setopt share_history # share command history data
 setopt auto_list
 
+echo "configure complete"
 ##############################################
 # Completion configuration
 #---------------------------------------------
@@ -161,8 +170,8 @@ compinit
 
 
 
-#export TERM=xterm-16color
 
+echo "define custome commands"
 function convert_smb_url() {
   local file_path=''
   if [ -n "$1" ] ; then
@@ -239,19 +248,14 @@ function man {
 }
 
 
-local WORK_ROOT=${HOME}/Work
-local DEV_ROOT=${WORK_ROOT}/watch
-alias cdr='cd ${WORK_ROOT}'
-alias cddev='cd ${DEV_ROOT}'
-alias cdcss='cd ${DEV_ROOT}/web/css/watch_zero'
-alias rmtplc='rm -rf ${DEV_ROOT}/web/tplc/*'
-
+echo "apply language virtual environments"
 
 fpath=(~/.functions ${fpath})
 ls ~/.nvm     >& /dev/null && source ~/.nvm/nvm.sh
 ls ~/.phpbrew >& /dev/null && source ~/.phpbrew/bashrc
 which rbenv   >& /dev/null && eval "$(rbenv init -)"
 which pyenv   >& /dev/null && eval "$(pyenv init -)"
+which direnv  >& /dev/null && eval "$(direnv hook zsh)"
 export PATH="$HOME/.pyenv/bin:$PATH"
 
 ### Added by the Heroku Toolbelt
