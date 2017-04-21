@@ -1,3 +1,4 @@
+parser: babel-eslint
 env:
   browser: true
   es6: true
@@ -5,14 +6,16 @@ env:
   mocha: true
 plugins:
   - react
+  - flowtype
 parserOptions:
   ecmaFeatures:
     jsx: true
   sourceType: module
-extends: 'eslint:recommended'
+extends:
+  - 'eslint:recommended'
+  - "plugin:flowtype/recommended"
 rules:
   no-trailing-spaces: error
-  no-class-assign: off
   comma-spacing:
     - error
     - {
@@ -34,6 +37,7 @@ rules:
     - error
     - always
   react/jsx-uses-vars: 1
+
 globals:
   #library
   $: true
