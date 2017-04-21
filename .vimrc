@@ -20,6 +20,7 @@ call dein#add('kchmck/vim-coffee-script')
 call dein#add('lambdalisue/unite-grep-vcs')
 call dein#add('slim-template/vim-slim')
 call dein#add('mxw/vim-jsx')
+call dein#add('pangloss/vim-javascript')
 
 call dein#end()
 
@@ -30,6 +31,8 @@ let g:syntastic_ignore_files=['.html$','.tpl$']
 let g:syntastic_coffee_coffeelint_args = '-f ~/.coffeelintrc'
 let g:syntastic_scss_scss_lint_args = '-c ~/.scss-lint.yml'
 let g:syntastic_javascript_checkers=['eslint']
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
 
 filetype on
 filetype plugin on                                            " enable filetype plugin
