@@ -1,5 +1,10 @@
 {
   "dependencies": {
+    "babel-eslint": {
+      "version": "7.2.2",
+      "from": "babel-eslint@latest",
+      "resolved": "https://registry.npmjs.org/babel-eslint/-/babel-eslint-7.2.2.tgz"
+    },
     "cli-validator-for-jsonschema": {
       "version": "1.0.0",
       "from": "git+ssh://git@github.com/umezo/cli-validator-for-jsonschema.git",
@@ -10,10 +15,25 @@
       "from": "eslint@latest",
       "resolved": "https://registry.npmjs.org/eslint/-/eslint-3.13.1.tgz"
     },
+    "eslint-plugin-flowtype": {
+      "version": "2.32.1",
+      "from": "eslint-plugin-flowtype@latest",
+      "resolved": "https://registry.npmjs.org/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.32.1.tgz"
+    },
     "eslint-plugin-react": {
       "version": "6.9.0",
       "from": "eslint-plugin-react@latest",
       "resolved": "https://registry.npmjs.org/eslint-plugin-react/-/eslint-plugin-react-6.9.0.tgz"
+    },
+    "flow-bin": {
+      "version": "0.43.1",
+      "from": "flow-bin@latest",
+      "resolved": "https://registry.npmjs.org/flow-bin/-/flow-bin-0.43.1.tgz"
+    },
+    "node-inspector": {
+      "version": "1.0.0",
+      "from": "node-inspector@latest",
+      "resolved": "https://registry.npmjs.org/node-inspector/-/node-inspector-1.0.0.tgz"
     },
     "npm": {
       "version": "3.10.8"
