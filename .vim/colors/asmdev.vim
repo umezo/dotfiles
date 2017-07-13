@@ -24,8 +24,8 @@ hi SpecialKey	            ctermfg=darkgreen
 hi NonText	     cterm=bold ctermfg=darkblue
 hi Directory	            ctermfg=cyan
 hi ErrorMsg	     cterm=bold ctermfg=white   ctermbg=darkred
-hi IncSearch	 cterm=NONE ctermfg=yellow  ctermbg=green
-hi Search	     cterm=NONE ctermfg=darkred ctermbg=red
+hi IncSearch	 cterm=NONE ctermfg=yellow ctermbg=darkgreen
+hi Search	     cterm=NONE ctermfg=yellow ctermbg=red
 hi MoreMsg	                ctermfg=darkgreen
 hi ModeMsg       cterm=NONE ctermfg=darkmagenta
 hi LineNr	                ctermfg=magenta
@@ -54,8 +54,8 @@ hi Ignore	     cterm=bold ctermfg=7
 hi Error	     cterm=bold ctermfg=7 ctermbg=1
 
 " color popup window
-hi Pmenu    ctermfg=darkred ctermbg=black
-hi PmenuSel ctermfg=white   ctermbg=red
+hi PmenuSel ctermfg=black ctermbg=darkred
+hi Pmenu    ctermfg=white ctermbg=red
 
 " color tabbar
 hi TabLine    ctermfg=white ctermbg=black

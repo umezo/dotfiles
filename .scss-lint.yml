@@ -101,7 +101,7 @@ linters:
     variable_convention: ^[-a-zA-Z0-9]+$
 
   NestingDepth:
-    enabled: true
+    enabled: false
     max_depth: 5
     ignore_parent_selectors: false
 
@@ -437,7 +437,7 @@ linters:
     allow_element_with_id: false
 
   SelectorDepth:
-    enabled: true
+    enabled: false
     max_depth: 3
 
   SelectorFormat:

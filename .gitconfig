@@ -7,9 +7,9 @@
   merge = merge --no-ff 
   br = branch
   st = status
-  pr = pull --rebase
+  pr = pull --rebase --autostash
+  push = push -u
   branch-info = for-each-ref refs/remotes --sort=committerdate --format=\"%(committerdate:short) %(committername) %(refname:short)\"
-
 
 [color]
   status = auto

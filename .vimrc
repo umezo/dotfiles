@@ -21,6 +21,7 @@ call dein#add('lambdalisue/unite-grep-vcs')
 call dein#add('slim-template/vim-slim')
 call dein#add('mxw/vim-jsx')
 call dein#add('pangloss/vim-javascript')
+call dein#add('flowtype/vim-flow')
 
 call dein#end()
 
@@ -33,6 +34,7 @@ let g:syntastic_scss_scss_lint_args = '-c ~/.scss-lint.yml'
 let g:syntastic_javascript_checkers=['eslint']
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
+let g:flow#autoclose = 1
 
 filetype on
 filetype plugin on                                            " enable filetype plugin
@@ -98,7 +100,7 @@ nnoremap <silent> <C-c><C-d> :cd %:h<CR>
 nnoremap <silent> <F10> :tabedit ~/.vimrc<CR>
 nnoremap <F11> :source ~/.vimrc<CR>:echo "updated"<CR>
 
-nnoremap <C-o> <ESC>o
+inoremap <C-o> <ESC>o
 imap <C-j> <Down>
 imap <C-k> <Up>
 imap <C-h> <Left>
@@ -135,12 +137,12 @@ autocmd! BufNewFile,BufRead *.js setlocal filetype=javascript
 autocmd! Filetype js setlocal filetype=javascript                                        
 autocmd! Filetype smarty setlocal filetype=html                                          
 autocmd! Filetype javascript execute get(g:my_coding_style, 's2', '')                    
-autocmd! Filetype actionscript execute get(g:my_coding_style, 't4', '')                  
+autocmd! Filetype actionscript execute get(g:my_coding_style, 's4', '')                  
 autocmd! Filetype coffee execute get(g:my_coding_style, 's2', '')                        
 autocmd! Filetype vim execute get(g:my_coding_style, 's2', '')                           
-autocmd! Filetype php execute get(g:my_coding_style, 't4', '')                           
-autocmd! Filetype html execute get(g:my_coding_style, 't2', '')                          
-autocmd! Filetype xhtml execute get(g:my_coding_style, 't2', '')                         
+autocmd! Filetype php execute get(g:my_coding_style, 's4', '')                           
+autocmd! Filetype html execute get(g:my_coding_style, 's2', '')                          
+autocmd! Filetype xhtml execute get(g:my_coding_style, 's2', '')                         
 autocmd! Filetype css execute get(g:my_coding_style, 's2', '')                           
 autocmd! Filetype scss execute get(g:my_coding_style, 's2', '')
 set listchars=tab:\|\ ,trail:^
