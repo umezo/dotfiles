@@ -5,10 +5,10 @@
 [alias]
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
   merge = merge --no-ff 
-  br = branch
+  br = branch -vv
   st = status
   pr = pull --rebase --autostash
-  push = push -u
+  pu = push -u
   branch-info = for-each-ref refs/remotes --sort=committerdate --format=\"%(committerdate:short) %(committername) %(refname:short)\"
 
 [color]
