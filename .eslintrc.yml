@@ -7,21 +7,16 @@ env:
 plugins:
   - react
   - flowtype
+  - import
 parserOptions:
   ecmaFeatures:
     jsx: true
   sourceType: module
 extends:
   - 'eslint:recommended'
-  - "plugin:flowtype/recommended"
+  - 'plugin:react/recommended'
+  - 'plugin:flowtype/recommended'
 rules:
-  no-trailing-spaces: error
-  comma-spacing:
-    - error
-    - {
-      before: false,
-      after: true
-    }
   indent:
     - error
     - 2
@@ -31,13 +26,190 @@ rules:
   quotes:
     - error
     - single
-  jsx-quotes:
-    - error
+    - avoidEscape: true
   semi:
     - error
     - always
-  react/jsx-uses-vars: 1
+  # if(){} の {}省略を禁止する。(fixable)
+  curly:
+    - error
+    - all
+  # parseIntの第二引数を強制する。parseInt("071");で57が返ったりするため。
+  radix:
+    - error
+    - always
+  # 配列の余分なspaceをerrorにする。(fixable)
+  array-bracket-spacing:
+    - error
+    - never
+  # 改行時ケツカンマ必須。git差分が見づらくなったり、不要なコンフリクトを生むため。(fixable)
+  comma-dangle:
+    - error
+    - always-multiline
+  comma-spacing:
+    - error
+    - {
+      before: false,
+      after: true
+    }
+  # カンマは行頭ではなく行末につける。(fixable)
+  comma-style:
+    - error
+    - last
+  # ファイルの最後に改行入れる。不要なgit差分を生まないため。(fixable)
+  eol-last: error
+  # ifなどの後にspaceをいれる。(fixable)
+  keyword-spacing: error
+  # 関数call時の()の前にspaceいれない。(fixable)
+  func-call-spacing:
+    - error
+    - never
+  # jsxはeslintのdefault設定で統一する。(fixable)
+  jsx-quotes:
+    - error
+  # オブジェクトの : の後にspace1つ入れる。前にはspaceを入れない。(fixable)
+  key-spacing:
+    - error
+    - {
+      beforeColon: false,
+      afterColon: true
+    }
+  # ifの無駄なネストをエラーにする。(fixable)
+  no-lonely-if: error
+  # 有効な空行数。3行以上空行いれるケースはないのでerrorにする。
+  # ファイルの最後の空行はgit差分を生まないようerrorにする。(fixable)
+  no-multiple-empty-lines:
+    - error
+    - {
+      max: 2,
+      maxEOF: 0
+    }
+  # 文中のtab文字はgithub等で表示が変わるためerrorにする。
+  no-tabs: error
+  # 行末にspaceがあるとerror。
+  no-trailing-spaces:
+    - error
+    - {
+      skipBlankLines: true
+    }
+  # .チェインの前後にspaceがあるとerror。(fixable)
+  no-whitespace-before-property: error
+  # objectの {} 内にspaceをいれる。配列は数が多くなるので入れない。(fixable)
+  object-curly-spacing:
+    - error
+    - never
+  # ;の手前にspaceがあるとerror。(fixable)
+  semi-spacing: error
+  # {} の前にspace入れる。(fixable)
+  space-before-blocks: error
+  # function foo () {} の()の前にspaceがあるとerror。(fixable)
+  space-before-function-paren:
+    - error
+    - never
+  # 関数定義の()内側にspaceいれない。(fixable)
+  space-in-parens:
+    - error
+    - never
+  # +とか||とか&&の前後にspace入れる。(fixable)
+  space-infix-ops: error
+  # arrow関数の=>の前後にspaceを入れる。(fixable)
+  arrow-spacing: error
+  # constでいいのにletを使っている場合はerrorにする。(fixable)
+  prefer-const: error
+  # templateリテラル内、${}の内側にスペースを入れない。(fixable)
+  template-curly-spacing:
+    - error
+    - never
+  # returnが必要なarray関数(mapとかsomeとか)のreturnをチェック
+  array-callback-return: error
+  # dangerouslySetInnerHTMLはXSSの脆弱性になるのでerrorにする。
+  react/no-danger: error
+  # 予期せぬ描画を引き起こすcomponentDidMountでのsetStateをerrorにしてくれる。
+  react/no-did-mount-set-state: error
+  # 予期せぬ描画を引き起こすcomponentDidUpdateでのsetStateをerrorにしてくれる。
+  react/no-did-update-set-state: error
+  # TODO: なおして有効にする
+  # 1ファイル内で複数classを作っているとerrorにしてくれる。functionalコンポーネントは可。
+  react/no-multi-comp:
+    - off
+    - {
+      ignoreStateless: true
+    }
+  # 予期せぬ描画を引き起こすcomponentWillUpdateでのsetStateをerrorにしてくれる。componentWillReceivePropsで行う。
+  react/no-will-update-set-state: error
+  # createReactClassは使用しない。ES6のclass構文で統一する。
+  react/prefer-es6-class:
+    - error
+    - always
+  # 中身がない要素は<div></div>と書かず<div/>と書く。(fixable)
+  react/self-closing-comp:
+    - error
+    - {
+      component: true,
+      html: true
+    }
+  # styleを必ずobjectで渡す
+  react/style-prop-object: error
+  # brやimgタグは中身持たないため、childrenがある場合はerrorにする。
+  react/void-dom-elements-no-children: error
+  # <Foo bar />ではなく<Foo bar={true} />を強制する。(fixable)
+  react/jsx-boolean-value:
+    - error
+    - always
 
+  # className={ hoge } の{}内のspaceをerrorにする。(fixable)
+  react/jsx-curly-spacing:
+    - error
+    - never
+
+  # className = {}のような、=の前後のspaceをerrorにする。(fixable)
+  react/jsx-equals-spacing:
+    - error
+    - never
+
+  # jsxでもindentを2スペにする。(fixable)
+  react/jsx-indent:
+    - error
+    - 2
+
+  # jsxの属性の改行時に2スペにする。(fixable)
+  react/jsx-indent-props:
+    - error
+    - 2
+
+  # キャメルケースでないコンポーネント(<Test_component />等)をエラーにする。
+  react/jsx-pascal-case: error
+  # jsxのタグ内のspace設定。(fixable)
+  react/jsx-tag-spacing:
+    - error
+    - {
+      closingSlash: never, # <div/ >みたいなspaceをerrorにする。
+      beforeSelfClosing: always, # <div />の/前にspaceを入れる。
+      afterOpening: never, # < div/>みたいなspaceをerrorにする。
+    }
+  # ()を使わずに改行した場合、errorにする。(fixable)
+  # const foo = <div>n<div>;
+  react/jsx-wrap-multilines:
+    - error
+    - {
+      declaration: true,
+      assignment: true,
+      return: true,
+      arrow: true
+    }
+  # importの後に1行改行入れる。
+  import/newline-after-import: error
+  # import最初にないと見辛いので必ず最初に。
+  import/imports-first: error
+  # .jsは省略で統一する。
+  import/extensions: error
+
+  # TODO: onにするために、コードを直す
+  #       そんなに単純には書き換えられないので一旦offでいきます
+  react/no-string-refs: off
+  # flowtype使うのでpropTypesなくてもerrorにしなくてよいが、
+  # react/recommendedに含まれているのでoffにする。
+  react/prop-types: off
 globals:
   #library
   $: true
