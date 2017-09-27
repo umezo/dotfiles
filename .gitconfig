@@ -9,6 +9,7 @@
   st = status
   pr = pull --rebase --autostash
   pu = push -u
+  dc = show --pretty=
   branch-info = for-each-ref refs/remotes --sort=committerdate --format=\"%(committerdate:short) %(committername) %(refname:short)\"
 
 [color]
