@@ -85,7 +85,7 @@ set diffopt=iwhite,filler
 "________________________________________________________________________________
 let mapleader = "\<TAB>" "means <c-i>
 nnoremap <Space> /
-nnoremap t :tabedit +tabmove .
+nnoremap t :tabedit +tabmove %:h
 nnoremap e :e .
 nnoremap <silent> <C-p> :tabnext<CR>
 nnoremap <silent> <C-n> :tabprevious<CR>
@@ -106,6 +106,7 @@ imap <C-k> <Up>
 imap <C-h> <Left>
 imap <C-l> <Right>
 
+nnoremap <leader><c-u><c-c> :UniteWithBufferDir file_rec/async:
 nnoremap <leader><c-u><c-f> :Unite file_rec/async:
 nnoremap <leader><c-u><c-g> :Unite grep/git:.<CR><c-r><c-w>
 nnoremap <leader><c-u><c-v> :UniteVersions
