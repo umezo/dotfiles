@@ -15,7 +15,6 @@ export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=$JAVA_HOME/bin:$PATH
-export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 export XDG_CONFIG_HOME=$HOME/.config
 export HOMEBREW_GITHUB_API_TOKEN="e85fa3e0a0e281eb1fadf4f1d4286d44393e1f88"
 
