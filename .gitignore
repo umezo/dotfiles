@@ -1,2 +1,6 @@
 .DS_Store
 nvim/.netrwhist
+nvimplugin
+!nvimplugin/.gitkeep
+.vim/bundle
+!.vim/bundle/.gitkeep
