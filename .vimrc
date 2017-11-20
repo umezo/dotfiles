@@ -49,10 +49,10 @@ set ruler                                                     " show ruler
 set showmatch                                                 " hilight bracket when a bracket is inserted
 set showmode                                                  " shoe current editor mode in status line
 
-set encoding=utf-8                                            " set encoding 
+set encoding=utf-8                                            " set encoding
 set termencoding=utf-8                                        " set terminal encoding
 set fileencoding=utf-8                                        " set file encoding
-set fileencodings=utf-8,euc-jp,iso-2022-jp,ucs2le,ucs-2       " set priority to detect file encoding 
+set fileencodings=utf-8,euc-jp,iso-2022-jp,ucs2le,ucs-2       " set priority to detect file encoding
 set fileformat=unix                                           " set line break charactor
 
 let g:use_xhtml = 1
@@ -68,7 +68,7 @@ set smartindent                                               " enable smart ind
 set autoindent                                                " enable auto indent
 set tabstop=2                                                 " set tab stop to 2
 set sts=2                                                     " soft tab stop
-set sw=2                                                      " shift width 
+set sw=2                                                      " shift width
 set splitright                                                " split window to right   (:sp
 set splitbelow                                                " split window to bellow  (:vs
 set backspace=2                                               " delete indent , eol and start by Back space
@@ -121,30 +121,30 @@ call unite#custom#default_action('file', 'tabopen')
 call unite#custom#default_action('jump_list', 'tabopen')
 call unite#custom_max_candidates('file_rec,file_rec/async', 0)
 
-let g:my_coding_style = {}                                                               
-let g:my_coding_style['s']  = 'setlocal expandtab'                                       
-let g:my_coding_style['t']  = 'setlocal noexpandtab'                                     
+let g:my_coding_style = {}
+let g:my_coding_style['s']  = 'setlocal expandtab'
+let g:my_coding_style['t']  = 'setlocal noexpandtab'
 let g:my_coding_style['s2'] = 'setlocal expandtab   tabstop=2 shiftwidth=2 softtabstop=2'
 let g:my_coding_style['t2'] = 'setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2'
 let g:my_coding_style['s4'] = 'setlocal expandtab   tabstop=4 shiftwidth=4 softtabstop=4'
 let g:my_coding_style['t4'] = 'setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4'
-command! -bar -nargs=1 CodingStyle execute get(g:my_coding_style, <f-args>, '')          
-                                                                                        
-autocmd! BufNewFile,BufRead *.ejs setlocal filetype=html                                 
-autocmd! Filetype ejs setlocal filetype=html                                             
-autocmd! BufNewFile,BufRead *.as setlocal filetype=actionscript                          
-autocmd! Filetype as setlocal filetype=actionscript                                      
-autocmd! BufNewFile,BufRead *.js setlocal filetype=javascript                            
-autocmd! Filetype js setlocal filetype=javascript                                        
-autocmd! Filetype smarty setlocal filetype=html                                          
-autocmd! Filetype javascript execute get(g:my_coding_style, 's2', '')                    
-autocmd! Filetype actionscript execute get(g:my_coding_style, 's4', '')                  
-autocmd! Filetype coffee execute get(g:my_coding_style, 's2', '')                        
-autocmd! Filetype vim execute get(g:my_coding_style, 's2', '')                           
-autocmd! Filetype php execute get(g:my_coding_style, 's4', '')                           
-autocmd! Filetype html execute get(g:my_coding_style, 's2', '')                          
-autocmd! Filetype xhtml execute get(g:my_coding_style, 's2', '')                         
-autocmd! Filetype css execute get(g:my_coding_style, 's2', '')                           
+command! -bar -nargs=1 CodingStyle execute get(g:my_coding_style, <f-args>, '')
+
+autocmd! BufNewFile,BufRead *.ejs setlocal filetype=html
+autocmd! Filetype ejs setlocal filetype=html
+autocmd! BufNewFile,BufRead *.as setlocal filetype=actionscript
+autocmd! Filetype as setlocal filetype=actionscript
+autocmd! BufNewFile,BufRead *.js setlocal filetype=javascript
+autocmd! Filetype js setlocal filetype=javascript
+autocmd! Filetype smarty setlocal filetype=html
+autocmd! Filetype javascript execute get(g:my_coding_style, 's2', '')
+autocmd! Filetype actionscript execute get(g:my_coding_style, 's4', '')
+autocmd! Filetype coffee execute get(g:my_coding_style, 's2', '')
+autocmd! Filetype vim execute get(g:my_coding_style, 's2', '')
+autocmd! Filetype php execute get(g:my_coding_style, 's4', '')
+autocmd! Filetype html execute get(g:my_coding_style, 's2', '')
+autocmd! Filetype xhtml execute get(g:my_coding_style, 's2', '')
+autocmd! Filetype css execute get(g:my_coding_style, 's2', '')
 autocmd! Filetype scss execute get(g:my_coding_style, 's2', '')
 set listchars=tab:\|\ ,trail:^
 
