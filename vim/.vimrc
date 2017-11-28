@@ -4,26 +4,28 @@
 if &compatible
   set nocompatible
 endif
-set runtimepath+=~/.dein
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-call dein#begin('~/.dein')
+if dein#load_state('~/.vim/dein')
+  call dein#begin('~/.vim/dein')
 
-call dein#add('Shougo/dein.vim')
-call dein#add('mattn/emmet-vim.git'           )
-call dein#add('Shougo/unite.vim.git'          )
-call dein#add('thinca/vim-ft-svn_diff.git'    )
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-call dein#add('scrooloose/syntastic.git'      )
-call dein#add('hrsh7th/vim-versions.git'      )
-call dein#add('leafgarland/typescript-vim.git')
-call dein#add('kchmck/vim-coffee-script')
-call dein#add('lambdalisue/unite-grep-vcs')
-call dein#add('slim-template/vim-slim')
-call dein#add('mxw/vim-jsx')
-call dein#add('pangloss/vim-javascript')
-call dein#add('flowtype/vim-flow')
+  call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('mattn/emmet-vim.git'           )
+  call dein#add('Shougo/unite.vim.git'          )
+  call dein#add('thinca/vim-ft-svn_diff.git'    )
+  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+  call dein#add('scrooloose/syntastic.git'      )
+  call dein#add('hrsh7th/vim-versions.git'      )
+  call dein#add('leafgarland/typescript-vim.git')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('lambdalisue/unite-grep-vcs')
+  call dein#add('slim-template/vim-slim')
+  call dein#add('mxw/vim-jsx')
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('flowtype/vim-flow')
 
-call dein#end()
+  call dein#end()
+endif
 
 filetype plugin indent on
 " ---------------------------------------
