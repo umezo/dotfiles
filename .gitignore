@@ -2,5 +2,5 @@
 nvim/.netrwhist
 nvimplugin
 !nvimplugin/.gitkeep
-.vim/bundle
-!.vim/bundle/.gitkeep
+vim/.vim/bundle
+!vim/.vim/bundle/.gitkeep

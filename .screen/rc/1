@@ -1,4 +1,0 @@
-source .screen/rc/defaults
-caption always "%{=dd}%h%-023=%Y/%m/%d %02:%s %A"
-
-screen screen -qUmc .screen/rc/main
