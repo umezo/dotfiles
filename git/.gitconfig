@@ -1,6 +1,6 @@
 [user]
 	name = umezo
-	email = umezo@tsuyabu.in
+	email = umezo100@gmail.com
 
 [alias]
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
