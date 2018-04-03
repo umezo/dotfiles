@@ -207,7 +207,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "delete_forward"
+                                        "key_code": "delete_or_backspace"
                                     }
                                 ],
                                 "type": "basic"
@@ -226,7 +226,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "delete_or_backspace"
+                                        "key_code": "delete_forward"
                                     }
                                 ],
                                 "type": "basic"
