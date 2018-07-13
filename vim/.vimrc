@@ -14,15 +14,22 @@ if dein#load_state('~/.vim/dein')
   call dein#add('Shougo/unite.vim.git'          )
   call dein#add('thinca/vim-ft-svn_diff.git'    )
   call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-  call dein#add('scrooloose/syntastic.git'      )
+  " call dein#add('scrooloose/syntastic.git'      )
   call dein#add('hrsh7th/vim-versions.git'      )
   call dein#add('leafgarland/typescript-vim.git')
   call dein#add('kchmck/vim-coffee-script')
-  call dein#add('lambdalisue/unite-grep-vcs')
   call dein#add('slim-template/vim-slim')
   call dein#add('mxw/vim-jsx')
   call dein#add('pangloss/vim-javascript')
   call dein#add('flowtype/vim-flow')
+  call dein#add('Quramy/tsuquyomi')
+
+  call dein#add('thinca/vim-quickrun')
+  call dein#add('osyo-manga/shabadou.vim')
+  call dein#add('jceb/vim-hier')
+  call dein#add('osyo-manga/vim-watchdogs')
+
+  call dein#add('prettier/vim-prettier')
 
   call dein#end()
 endif
@@ -30,10 +37,11 @@ endif
 filetype plugin indent on
 " ---------------------------------------
 
-let g:syntastic_ignore_files=['.html$','.tpl$']
-let g:syntastic_coffee_coffeelint_args = '-f ~/.coffeelintrc'
-let g:syntastic_scss_scss_lint_args = '-c ~/.scss-lint.yml'
-let g:syntastic_javascript_checkers=['eslint']
+" let g:syntastic_ignore_files=['.html$','.tpl$']
+" let g:syntastic_coffee_coffeelint_args = '-f ~/.coffeelintrc'
+" let g:syntastic_scss_scss_lint_args = '-c ~/.scss-lint.yml'
+" let g:syntastic_javascript_checkers=['eslint']
+" let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
 let g:flow#autoclose = 1
@@ -96,7 +104,7 @@ nnoremap > <C-w>>
 nnoremap < <C-w><
 nnoremap <C-j> <C-e>
 nnoremap <C-k> <C-y>
-nnoremap <leader><c-f><c-f> :call system("eslint --fix " . expand("%"))<CR>:e!<CR>:w<CR>
+nnoremap <leader><c-f><c-f> :Prettier<CR>
 nnoremap <silent> <C-c><C-d> :cd %:h<CR>
 
 nnoremap <silent> <F10> :tabedit ~/.vimrc<CR>
@@ -109,13 +117,28 @@ imap <C-h> <Left>
 imap <C-l> <Right>
 
 nnoremap <leader><c-u><c-c> :UniteWithBufferDir file_rec/async:
-nnoremap <leader><c-u><c-f> :Unite file_rec/async:
-nnoremap <leader><c-u><c-g> :Unite grep/git:.<CR><c-r><c-w>
+nnoremap <leader><c-u><c-f> :Unite file_rec/git:
+nnoremap <leader><c-u><c-g> :Unite grep/git:/<CR>
 nnoremap <leader><c-u><c-v> :UniteVersions
 nnoremap <leader><c-u><c-l> :Unite line
 nnoremap <leader><c-u><c-r> :UniteResume<CR>
 
-"vmap <silent> <C-a>= :Alignta =<CR>
+let g:quickrun_config = {
+\   "typescript/watchdogs_checker" : {
+\       "type"   : "watchdogs_checker/tslint",
+\       "cmdopt" : "--project tsconfig.json",
+\       "exec"   : "%c %o %s:p ",
+\				"quickfix/errorformat" : "ERROR: %f[%l\\, %c]: %m",
+\   },
+\   "scss/watchdogs_checker" : {
+\       "type"   : "watchdogs_checker/stylelint",
+\   },
+\}
+
+call watchdogs#setup(g:quickrun_config)
+
+" 書き込み後にシンタックスチェックを行う
+let g:watchdogs_check_BufWritePost_enable = 1
 
 colorscheme asmdev                                            " color setting
 
@@ -123,6 +146,7 @@ call unite#custom#default_action('file', 'tabopen')
 call unite#custom#default_action('jump_list', 'tabopen')
 call unite#custom_max_candidates('file_rec,file_rec/async', 0)
 
+let g:tsuquyomi_definition_split = 3
 let g:my_coding_style = {}
 let g:my_coding_style['s']  = 'setlocal expandtab'
 let g:my_coding_style['t']  = 'setlocal noexpandtab'
@@ -140,6 +164,7 @@ autocmd! BufNewFile,BufRead *.js setlocal filetype=javascript
 autocmd! Filetype js setlocal filetype=javascript
 autocmd! Filetype smarty setlocal filetype=html
 autocmd! Filetype javascript execute get(g:my_coding_style, 's2', '')
+autocmd! Filetype typescript execute get(g:my_coding_style, 's2', '')
 autocmd! Filetype actionscript execute get(g:my_coding_style, 's4', '')
 autocmd! Filetype coffee execute get(g:my_coding_style, 's2', '')
 autocmd! Filetype vim execute get(g:my_coding_style, 's2', '')
