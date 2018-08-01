@@ -10,26 +10,21 @@ if dein#load_state('~/.vim/dein')
   call dein#begin('~/.vim/dein')
 
   call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
-  call dein#add('mattn/emmet-vim.git'           )
   call dein#add('Shougo/unite.vim.git'          )
   call dein#add('thinca/vim-ft-svn_diff.git'    )
   call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-  " call dein#add('scrooloose/syntastic.git'      )
-  call dein#add('hrsh7th/vim-versions.git'      )
+
+  " hilight系
   call dein#add('leafgarland/typescript-vim.git')
   call dein#add('kchmck/vim-coffee-script')
   call dein#add('slim-template/vim-slim')
   call dein#add('mxw/vim-jsx')
   call dein#add('pangloss/vim-javascript')
   call dein#add('flowtype/vim-flow')
-  call dein#add('Quramy/tsuquyomi')
 
-  call dein#add('thinca/vim-quickrun')
-  call dein#add('osyo-manga/shabadou.vim')
-  call dein#add('jceb/vim-hier')
-  call dein#add('osyo-manga/vim-watchdogs')
+  " call dein#add('Quramy/tsuquyomi')
 
-  call dein#add('prettier/vim-prettier')
+  call dein#add('w0rp/ale')
 
   call dein#end()
 endif
@@ -123,22 +118,9 @@ nnoremap <leader><c-u><c-v> :UniteVersions
 nnoremap <leader><c-u><c-l> :Unite line
 nnoremap <leader><c-u><c-r> :UniteResume<CR>
 
-let g:quickrun_config = {
-\   "typescript/watchdogs_checker" : {
-\       "type"   : "watchdogs_checker/tslint",
-\       "cmdopt" : "--project tsconfig.json",
-\       "exec"   : "%c %o %s:p ",
-\				"quickfix/errorformat" : "ERROR: %f[%l\\, %c]: %m",
-\   },
-\   "scss/watchdogs_checker" : {
-\       "type"   : "watchdogs_checker/stylelint",
-\   },
-\}
-
-call watchdogs#setup(g:quickrun_config)
-
-" 書き込み後にシンタックスチェックを行う
-let g:watchdogs_check_BufWritePost_enable = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_text_changed = 0
 
 colorscheme asmdev                                            " color setting
 
@@ -146,7 +128,6 @@ call unite#custom#default_action('file', 'tabopen')
 call unite#custom#default_action('jump_list', 'tabopen')
 call unite#custom_max_candidates('file_rec,file_rec/async', 0)
 
-let g:tsuquyomi_definition_split = 3
 let g:my_coding_style = {}
 let g:my_coding_style['s']  = 'setlocal expandtab'
 let g:my_coding_style['t']  = 'setlocal noexpandtab'
