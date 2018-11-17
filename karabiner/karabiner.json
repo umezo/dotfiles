@@ -19,10 +19,42 @@
                         "manipulators": [
                             {
                                 "from": {
+                                    "key_code": "international4",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "lang1"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "international5",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "lang2"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "lang2",
                                     "modifiers": {
                                         "mandatory": [
-                                          "shift"
+                                            "shift"
                                         ]
                                     }
                                 },
@@ -38,7 +70,7 @@
                                     "key_code": "lang1",
                                     "modifiers": {
                                         "mandatory": [
-                                          "shift"
+                                            "shift"
                                         ]
                                     }
                                 },
@@ -51,10 +83,42 @@
                             },
                             {
                                 "from": {
+                                    "key_code": "international4",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "international5",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "lang2",
                                     "modifiers": {
                                         "optional": [
-                                          "any"
+                                            "any"
                                         ]
                                     }
                                 },
@@ -70,7 +134,7 @@
                                     "key_code": "lang1",
                                     "modifiers": {
                                         "optional": [
-                                          "any"
+                                            "any"
                                         ]
                                     }
                                 },
@@ -235,7 +299,46 @@
                     }
                 ]
             },
-            "devices": [],
+            "devices": [
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 8280,
+                        "vendor_id": 6493
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "caps_lock"
+                            },
+                            "to": {
+                                "key_code": "left_control"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_control"
+                            },
+                            "to": {
+                                "key_code": "caps_lock"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "delete_or_backspace"
+                            },
+                            "to": {
+                                "pointing_button": "button4"
+                            }
+                        }
+                    ]
+                }
+            ],
             "fn_function_keys": [
                 {
                     "from": {
@@ -339,6 +442,7 @@
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
+                "country_code": 0,
                 "keyboard_type": "jis"
             }
         },
@@ -456,6 +560,7 @@
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
+                "country_code": 0,
                 "keyboard_type": ""
             }
         }
