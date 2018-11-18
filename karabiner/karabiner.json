@@ -322,18 +322,48 @@
                         },
                         {
                             "from": {
+                                "key_code": "left_option"
+                            },
+                            "to": {
+                                "key_code": "left_command"
+                            }
+                        },
+                        {
+                            "from": {
                                 "key_code": "print_screen"
                             },
                             "to": {
                                 "pointing_button": "button4"
                             }
+                        }
+                    ]
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": false,
+                        "is_pointing_device": true,
+                        "product_id": 208,
+                        "vendor_id": 1390
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "pointing_button": "button4"
+                            },
+                            "to": {
+                                "pointing_button": "button5"
+                            }
                         },
                         {
                             "from": {
-                                "key_code": "left_option"
+                                "pointing_button": "button5"
                             },
                             "to": {
-                                "key_code": "left_command"
+                                "pointing_button": "button4"
                             }
                         }
                     ]
@@ -438,7 +468,7 @@
                 }
             ],
             "name": "Default profile",
-            "selected": true,
+            "selected": false,
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
@@ -556,7 +586,7 @@
                 }
             ],
             "name": "Plain",
-            "selected": false,
+            "selected": true,
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
